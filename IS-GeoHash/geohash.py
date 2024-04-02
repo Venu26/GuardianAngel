@@ -31,5 +31,6 @@ def getGeohash():
     return geohash1
 
 
-if __name__ == '__main__':  
-   app.run(host='10.2.8.16',port=5000,debug=True)
+if __name__ == '__main__':
+   from waitress import serve  
+   app.run(host='0.0.0.0',port=5000,debug=True)
