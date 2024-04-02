@@ -32,4 +32,4 @@ def getGeohash():
 
 
 if __name__ == '__main__':  
-   app.run()
+   app.run(host='10.2.8.16',port=5000,debug=True)
