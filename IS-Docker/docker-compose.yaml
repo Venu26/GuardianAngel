@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+  rabbitmq-node1:
+    image: rabbitmq:3.8-management
+    container_name: node-1
+    hostname: node-1
+    ports:
+      - "8081:15672"
+      - "1883:1883"
+    volumes:
+      - ./rabbitmq-node1/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    environment:
+      RABBITMQ_PLUGINS: "rabbitmq_mqtt"
+      RABBITMQ_MQTT_TCP_LISTENER_PORT: 1883
+      RABBITMQ_ERLANG_COOKIE: "erlangcookie"
+    networks:
+      - rabbitmq-network
+  rabbitmq-node2:
+    image: rabbitmq:3.8-management
+    container_name: node-2
+    hostname: node-2
+    ports:
+      - "8082:15672"
+      - "1884:1884"
+    volumes:
+      - ./rabbitmq-node2/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      
+    
+    environment:
+      RABBITMQ_PLUGINS: "rabbitmq_mqtt"
+      RABBITMQ_MQTT_TCP_LISTENER_PORT: 1884
+      RABBITMQ_ERLANG_COOKIE: "erlangcookie"
+    networks:
+      - rabbitmq-network
+  rabbitmq-node3:
+    image: rabbitmq:3.8-management
+    container_name: node-3
+    hostname: node-3
+    ports:
+      - "8083:15672"
+      - "1885:1885"
+    volumes:
+      - ./rabbitmq-node3/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      
+    
+    environment:
+      RABBITMQ_PLUGINS: "rabbitmq_mqtt"
+      RABBITMQ_MQTT_TCP_LISTENER_PORT: 1885
+      RABBITMQ_ERLANG_COOKIE: "erlangcookie"
+    networks:
+      - rabbitmq-network
+
+networks:
+  rabbitmq-network:
+    driver: bridge
